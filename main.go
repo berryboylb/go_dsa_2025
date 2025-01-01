@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	dsa_01.Dsa()
+	dsa_01.Main()
 }
