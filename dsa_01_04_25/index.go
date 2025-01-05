@@ -1,7 +1,5 @@
 package dsa_01_04_25
 
-import "fmt"
-
 /*
    80. Remove Duplicates from Sorted Array II
 
@@ -15,7 +13,8 @@ import "fmt"
 */
 
 /*
-   Psuedocode
+   Pseudocode
+
    1. initialize a counter and a map
 
    2. loop through the array of numbers
@@ -41,7 +40,6 @@ func solution(nums []int) int {
 		}
 	}
 
-	fmt.Println(count, nums)
 	return count
 }
 
