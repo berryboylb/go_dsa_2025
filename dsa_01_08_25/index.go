@@ -21,6 +21,8 @@ Find and return the maximum profit you can achieve.
   2. if day i  - day i-1 profit i greater than zero add it
 */
 
+
+
 func solution(prices []int) int {
 	maxProfit := 0
     
