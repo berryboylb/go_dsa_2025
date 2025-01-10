@@ -1,7 +1,7 @@
 package dsa_01_09_25
 
 import (
-	"Math"
+	"math"
 )
 
 /*
