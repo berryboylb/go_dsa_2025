@@ -1,6 +1,7 @@
 package dsa_01_12_25
 
 import (
+	"fmt"
 	"math/rand"
 )
 
@@ -41,8 +42,10 @@ func (this *RandomizedSet) Remove(val int) bool {
 
 	// Swap the element to remove with the last element
 	lastElement := this.arr[this.size-1]
+	fmt.Println(lastElement, index, this.arr)
 	this.arr[index] = lastElement
 	this.set[lastElement] = index
+	fmt.Println(this.set, this.arr)
 
 	// Remove the last element
 	this.arr = this.arr[:this.size-1]
@@ -63,3 +66,16 @@ func (this *RandomizedSet) GetRandom() int {
  * param_2 := obj.Remove(val);
  * param_3 := obj.GetRandom();
  */
+
+func Main() {
+
+	randSet := Constructor()
+	randSet.Insert(2)
+	randSet.Insert(1)
+	randSet.Remove(2)
+	// randSet.Insert(2)
+	// randSet.GetRandom()
+	// randSet.Remove(1)
+	// randSet.Insert(2)
+	// randSet.GetRandom()
+}
