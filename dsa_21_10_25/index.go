@@ -2,90 +2,66 @@ package dsa_21_10_25
 
 import (
 	"fmt"
-	"sort"
-	"strconv"
 )
 
-func twoSum(nums []int, i int, result [][]int) [][]int {
-	left, right := i+1, len(nums)-1
+func solution(height []int) int {
+	max, left, right := 0, 0, len(height)-1
 
-	for left < right {
-		sum := nums[i] + nums[left] + nums[right]
-		if sum < 0 {
-			left++
-		} else if sum > 0 {
-			right--
+	for left <= right {
+		currHeight := 0
+		moveRight := false
+		if height[left] > height[right] {
+			currHeight = height[right]
 		} else {
-			result = append(result, []int{nums[i], nums[left], nums[right]})
+			moveRight = true
+			currHeight = height[left]
+		}
+		width := right - left
+		area := currHeight * width
+
+		if area > max {
+			max = area
+		}
+
+		if moveRight {
 			left++
+		} else {
 			right--
-
-			// skip duplicates
-			for left < right && nums[left] == nums[left-1] {
-				left++
-			}
-			for left < right && nums[right] == nums[right+1] {
-				right--
-			}
 		}
 	}
 
-	return result
+	fmt.Println("[max]", max)
+
+	return max
 }
 
-func solution(nums []int) [][]int {
-	res := make([][]int, 0)
-	sort.Ints(nums)
+func bruteForce(height []int) int {
+	max := 0
 
-	for i := 0; i < len(nums) && nums[i] <= 0; i++ {
-		if i == 0 || nums[i] != nums[i-1] {
-			res = twoSum(nums, i, res)
-		}
+	for i := 0; i < len(height); i++ {
+		for j := i + 1; j < len(height); j++ {
+			currHeight := 0
+			if height[i] > height[j] {
+				currHeight = height[j]
+			} else {
+				currHeight = height[i]
+			}
+			width := j - i
+			area := currHeight * width
 
-		// left, right, rem := i+1, len(nums)-1, 0-nums[i]
-		// for left <= right {
-		// 	if left+right < rem {
-		// 		left += 1
-		// 	} else if left+right > rem {
-		// 		right -= 1
-		// 	} else {
-		// 		res = append(res, []int{nums[i], nums[left], nums[right]})
-		// 	}
-		// }
-	}
-
-	fmt.Println("[data]", res)
-
-	return res
-}
-
-func bruteForce(nums []int) [][]int {
-	res := make([][]int, 0)
-	seen := map[string]bool{}
-
-	for i := 0; i < len(nums); i++ {
-		for j := i + 1; j < len(nums); j++ {
-			for k := j + 1; k < len(nums); k++ {
-				if nums[i]+nums[j]+nums[k] == 0 {
-					arr := []int{nums[i], nums[j], nums[k]}
-					sort.Ints(arr)
-					key := strconv.Itoa(arr[0]) + strconv.Itoa(arr[1]) + strconv.Itoa(arr[2])
-					if _, ok := seen[key]; ok {
-						continue
-					}
-					res = append(res, arr)
-					seen[key] = true
-
-				}
+			if area > max {
+				max = area
 			}
 		}
 	}
 
-	fmt.Println("[data]", res)
+	fmt.Println("[max]", max)
 
-	return res
+	return max
 }
 
 func Main() {
-	solution([]int{0, 0, 0})
+	solution([]int{
+		1, 8, 6, 2, 5, 4, 8, 3, 7,
+	})
 }
