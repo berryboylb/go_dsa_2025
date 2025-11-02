@@ -1,39 +1,27 @@
 package dsa_01_11_25
 
-import "sort"
-
-/*
-274. H-Index
-
-Hint
-Given an array of integers citations where citations[i] is the number of citations a researcher received for their ith paper, return the researcher's h-index.
-
-According to the definition of h-index on Wikipedia: The h-index is defined as the maximum value of h such that the given researcher has published at least h papers that have each been cited at least h times.
-*/
-
-/*
-
-  Pseudocode
-
-*/
-
-func solution(citations []int) int {
-
-	n := len(citations)
-
-	sort.Slice(citations, func(i, j int) bool {
-		return citations[j] > citations[i]
-	})
-
-	for index, _ := range citations {
-		if citations[index] >= n-index {
-			return n - index
+func solution(text1 string, text2 string) int {
+	len1, len2 := len(text1), len(text2)
+	dp := make([][]int, len1+1)
+	for i := 0; i <= len1; i++ {
+		dp[i] = make([]int, len2+1)
+	}
+	for i := 1; i <= len1; i++ {
+		for j := 1; j <= len2; j++ {
+			if text1[i-1] == text2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
+			} else {
+				dp[i][j] = dp[i-1][j]
+				if dp[i][j-1] > dp[i][j] {
+					dp[i][j] = dp[i][j-1]
+				}
+			}
 		}
+		return dp[len1][len2]
 	}
 
 	return 0
 }
 
 func Main() {
-	solution([]int{3, 0, 6, 1, 5})
 }
