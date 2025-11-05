@@ -1,6 +1,8 @@
 package dsa_03_11_25
 
-
+import (
+	"fmt"
+)
 
 // https://leetcode.com/problems/house-robber/description/
 
@@ -13,6 +15,7 @@ func solution(nums []int) int {
 		maxRes = max(rob1+nums[i], rob2)
 		rob1 = rob2
 		rob2 = maxRes
+		fmt.Println("[res]",rob1, rob2, maxRes)
 	}
 
 	return maxRes
