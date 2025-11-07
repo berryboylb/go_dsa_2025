@@ -1,7 +1,7 @@
 package main
 
 import (
-	dsa "dsa/dsa_06_11_25"
+	dsa "dsa/dsa_07_11_25"
 )
 
 func main() {
